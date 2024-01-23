@@ -16,8 +16,9 @@ if __name__ == '__main__':
     df = df.replace(np.nan, '', regex=True)
 
     #Booking Hotel analysis:
-    #1) What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
-    # 2) Who states and weekend nights more families with children during the summer? Families without children during the summer? Families with children over the winter?
+    #1)  What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
+    # 2) Which time periods see more families with children in the summer – weekdays or weekends?
+    #    And during the winter, are families with children more prevalent than those without children?
     # 3) In which month can we see the highest waiting list?
     # 4) Is there any connection between the lead time and the cancel status?
     # 5) How do the dynamics of invitations differ between resort hotels and city hotels?
