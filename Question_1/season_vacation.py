@@ -1,13 +1,11 @@
 import pandas as pd
 import numpy as np
+from matplotlib.patches import FancyBboxPatch
 import matplotlib.pyplot as plt
 import seaborn as sns
 # import matplotlib.lines as mlines
 # #import seaborn as sys
 # import seaborn as sns
-
-
-
 
 
 if __name__ == '__main__':
@@ -35,12 +33,16 @@ if __name__ == '__main__':
     summer_time = ['April','May','June','July','August','September']
     winter_time = ['October','November','December','January','February','March']
 
-    filter_season_vacation = df[df['arrival_date_month'].isin(summer_time)]
-    filter_season_vacation = filter_season_vacation.sort_values(by='arrival_date_month', inplace=True, ascending=False)
+    filter_summer_vacation = df[df['arrival_date_month'].isin(summer_time)]
+    filter_winter_vacation = df[df['arrival_date_month'].isin(winter_time)]
+    #filter_season_vacation = filter_season_vacation.sort_values(by='arrival_date_month', inplace=True, ascending=False)
     print('*')
 
-    avg_lead_time_in_the_summer = filter_season_vacation.loc['lead_time'].mean()
+    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:,'lead_time'].mean()
+    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean()
     print('*')
+
+
     # groups_by_year = filter_season_vacation.groupby('Year')
     # for current_year, mini_df_year in groups_by_year:
     #     print("The current year is: ", current_year)
