@@ -43,11 +43,6 @@ if __name__ == '__main__':
     print('*')
 
 
-    # groups_by_year = filter_season_vacation.groupby('Year')
-    # for current_year, mini_df_year in groups_by_year:
-    #     print("The current year is: ", current_year)
-
-
 
 
 
