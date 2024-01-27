@@ -8,6 +8,27 @@ import seaborn as sns
 # import seaborn as sns
 
 
+
+
+
+# **************************************************************************************************************
+# Question : What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
+# Function  name:  avg_lead_time_for_each_season
+# input:
+# return value:
+# ***************************************************************************************************************
+def avg_lead_time_for_each_season(df):
+    # 1) What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
+    summer_time = ['April', 'May', 'June', 'July', 'August', 'September']
+    winter_time = ['October', 'November', 'December', 'January', 'February', 'March']
+    filter_summer_vacation = df[df['arrival_date_month'].isin(summer_time)]
+    filter_winter_vacation = df[df['arrival_date_month'].isin(winter_time)]
+    print('*')
+    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:, 'lead_time'].mean()
+    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean()
+    return avg_lead_time_in_the_summer , avg_lead_time_in_the_winter
+
+
 if __name__ == '__main__':
 
     pd.set_option('display.max_rows', 5000)
@@ -29,18 +50,10 @@ if __name__ == '__main__':
     res = df['arrival_date_month'].value_counts()
     print('*')
 
-    # 1) What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
-    summer_time = ['April','May','June','July','August','September']
-    winter_time = ['October','November','December','January','February','March']
-
-    filter_summer_vacation = df[df['arrival_date_month'].isin(summer_time)]
-    filter_winter_vacation = df[df['arrival_date_month'].isin(winter_time)]
-    #filter_season_vacation = filter_season_vacation.sort_values(by='arrival_date_month', inplace=True, ascending=False)
+    avg_lead_time_for_each_season(df)
     print('*')
 
-    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:,'lead_time'].mean()
-    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean()
-    print('*')
+
 
 
 
