@@ -49,7 +49,6 @@ import seaborn as sns
 # #import seaborn as sys
 # import seaborn as sns
 
-
 # **************************************************************************************************************
 # Question : What is the avg lead time for the winter season? And what is the avg lead time for the summer time?
 # Function  name:  avg_lead_time_for_each_season
