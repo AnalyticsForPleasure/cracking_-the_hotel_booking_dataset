@@ -45,6 +45,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+
 # import matplotlib.lines as mlines
 # #import seaborn as sys
 # import seaborn as sns
@@ -62,15 +63,53 @@ def avg_lead_time_for_each_season(df):
     filter_summer_vacation = df[df['arrival_date_month'].isin(summer_time)]
     filter_winter_vacation = df[df['arrival_date_month'].isin(winter_time)]
     print('*')
-    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:, 'lead_time'].mean()
-    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean()
+    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the summer -> 122.553377
+    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the winter -> 76.933
+    lead_time_list = [avg_lead_time_in_the_summer, avg_lead_time_in_the_winter]
+    print('*')
+    return lead_time_list
 
-    return avg_lead_time_in_the_summer, avg_lead_time_in_the_winter
+# **************************************************************************************************************
+# Question :
+# Function  name:  avg_lead_time_for_each_season
+# input:
+# return value:
+# ***************************************************************************************************************
+
+def adding_a_bar_chart(avg_time_seasons):
+    fig, ax = plt.subplots(figsize=(21, 7))
+
+    bar_titles = ['Avg lead time in the summer', 'Avg lead time in the winter']  # Categorical data
+    avg_time_seasons_values = avg_time_seasons  # Integer value avg_time_seasons_values
+    plt.bar(bar_titles, avg_time_seasons_values)
+    #
+    # ax = sns.barplot(x=df.Completion, y=avg_time_seasons_values, orient='h', joinstyle='bevel')
+    #
+    # new_patches = []
+    # for patch in reversed(ax.patches):
+    #     bb = patch.get_bbox()
+    #     color = patch.get_facecolor()
+    #     p_bbox = FancyBboxPatch((bb.xmin, bb.ymin),
+    #                             abs(bb.width), abs(bb.height),
+    #                             boxstyle="round,pad=-0.0040,rounding_size=0.015",
+    #                             ec="none", fc=color,
+    #                             mutation_aspect=4
+    #                             )
+    #     patch.remove()
+    #     new_patches.append(p_bbox)
+    # for patch in new_patches:
+    #     ax.add_patch(patch)
+    #
+    # sns.despine(left=True)
+    # ax.yaxis.set_ticks([])
+
+    plt.show()
 
 
 if __name__ == '__main__':
     pd.set_option('display.max_rows', 5000)
     df = pd.read_csv('../Data/hotel_booking_data.csv')
+    #/ home / shay_diy / PycharmProjects / cracking_the_hotel_booking_dataset / Data / hotel_booking_data.csv
     df = df.replace(np.nan, '', regex=True)
 
     # Booking Hotel analysis:
@@ -87,18 +126,10 @@ if __name__ == '__main__':
         print(df[col].unique())
         print('#' * 50)
 
-    # print(df.describe())
-    # column_headers = list(df.columns.values)
-    # print("The Column Header :", column_headers)
-    # number_or_columns = df.shape[1]
-    # res = df['customer_type'].value_counts()
-    # res = df['arrival_date_month'].value_counts()
-    # print('*')
-    #
-    # avg_lead_time_for_each_season(df)
-    # print('*')
-
-    # number_of_rows = df.shape[0]
-    # res = df['country'].value_counts()
-    res_2 = df['country'].value_counts()
     print('*')
+
+    lead_time_list = avg_lead_time_for_each_season(df)
+    adding_a_bar_chart(lead_time_list )
+    print('*')
+
+
