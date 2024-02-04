@@ -63,8 +63,8 @@ def avg_lead_time_for_each_season(df):
     filter_summer_vacation = df[df['arrival_date_month'].isin(summer_time)]
     filter_winter_vacation = df[df['arrival_date_month'].isin(winter_time)]
     print('*')
-    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the summer -> 122.553377
-    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the winter -> 76.933
+    avg_lead_time_in_the_summer = filter_summer_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the summer -> 115.96 ( resort )
+    avg_lead_time_in_the_winter = filter_winter_vacation.loc[:, 'lead_time'].mean() # Avg lead time at the winter -> 61.946 ( resort )
     lead_time_list = [avg_lead_time_in_the_summer, avg_lead_time_in_the_winter]
     print('*')
     return lead_time_list
@@ -81,7 +81,10 @@ def adding_a_bar_chart(avg_time_seasons):
 
     bar_titles = ['Avg lead time in the summer', 'Avg lead time in the winter']  # Categorical data
     avg_time_seasons_values = avg_time_seasons  # Integer value avg_time_seasons_values
+
     plt.bar(bar_titles, avg_time_seasons_values)
+    #ax = sns.barplot(x=bar_titles, y=avg_time_seasons_values, orient='h', joinstyle='bevel')
+
     #
     # ax = sns.barplot(x=df.Completion, y=avg_time_seasons_values, orient='h', joinstyle='bevel')
     #
@@ -100,8 +103,8 @@ def adding_a_bar_chart(avg_time_seasons):
     # for patch in new_patches:
     #     ax.add_patch(patch)
     #
-    # sns.despine(left=True)
-    # ax.yaxis.set_ticks([])
+    sns.despine(left=True)
+    ax.yaxis.set_ticks([])
 
     plt.show()
 
@@ -121,15 +124,19 @@ if __name__ == '__main__':
     # 5) How do the dynamics of invitations differ between resort hotels and city hotels?
 
     # print(sorted(df.columns))
-    for col in ["meal"]:  # df.columns:
-        print(f'col: {col} :')
-        print(df[col].unique())
-        print('#' * 50)
+    # for col in ["meal"]:  # df.columns:
+    #     print(f'col: {col} :')
+    #     print(df[col].unique())
+    #     print('#' * 50)
+    #
+    # print('*')
 
-    print('*')
+    hotels = ['Resort Hotel','City Hotel']
 
-    lead_time_list = avg_lead_time_for_each_season(df)
-    adding_a_bar_chart(lead_time_list )
-    print('*')
+    for specific_hotel in hotels:
+        df_final = df.loc[df['hotel'] == specific_hotel, :]
+        lead_time_list = avg_lead_time_for_each_season(df_final)
+        adding_a_bar_chart(lead_time_list )
+        print('*')
 
 
